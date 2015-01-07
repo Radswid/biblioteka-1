@@ -1,7 +1,7 @@
 from django.contrib import admin
-from srkob.models import author, books, genre
+from srkob.models import Author, Books, Genre
 
-admin.site.register(author)
-admin.site.register(books)
-admin.site.register(genre)
+admin.site.register(Author)
+admin.site.register(Books)
+admin.site.register(Genre)
 

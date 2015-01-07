@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django import forms
 
-class author(models.Model):
+class Author(models.Model):
     first_name = models.CharField('Imię', max_length=50)
     last_name = models.CharField('Nazwisko', max_length=50)
 
@@ -15,7 +15,7 @@ class author(models.Model):
     def __unicode__(self):
         return self.last_name
 
-class genre(models.Model):
+class Genre(models.Model):
     genre_main = models.CharField('Gatunek', max_length=50)
 
     class Meta:
@@ -27,14 +27,14 @@ class genre(models.Model):
 
 
     
-class books(models.Model):
+class Books(models.Model):
     title = models.CharField('Tytuł', max_length=50)
-    author = models.ForeignKey(author)
+    author = models.ForeignKey(Author)
     about = models.TextField('Opis')
+    genre = models.ForeignKey(Genre, verbose_name="Gatunek")
+    sub_genre = models.CharField('Inne gatunki', max_length=50)
+    user = models.ForeignKey(User, verbose_name="Wypożyczył", null=True, blank=True)
     state = models.BooleanField('Wypożyczona')
-    genre_main = models.ForeignKey(genre, verbose_name="Gatunek")
-    sub_gengre = models.CharField('Gatunek', max_length=50)
-    
     class Meta:
         verbose_name = "Książka"
         verbose_name_plural = "Książki"

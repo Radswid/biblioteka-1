@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from srkob.models import books, genre
+from srkob.models import Books, Genre
 def index(request):
     context = RequestContext(request)
     context_dict = {'boldmessage': "I am bold font from the context"}
@@ -15,7 +15,7 @@ def about(request):
 
 def category(request):
     context =RequestContext(request)
-    category_category = genre.objects.order_by('-genre_main')[:5]
+    category_category = Genre.objects.order_by('-genre')[:5]
     context_dict = {'genres': category_category}
 
     # Render the response and send it back!
