@@ -2,11 +2,10 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from srkob.models import Books, Genre
+from srkob.models import Book, Genre
 from srkob.forms import UserForm, ProfileForm
 from django.contrib.auth.models import Group
-from django.contrib.auth import authenticate, login
-from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -19,13 +18,28 @@ def about(request):
     context_dict = {'boldmessage': " "}
     return render_to_response('srkob/about.html', context_dict, context)
 
-def category(request):
+def genre(request):
     context =RequestContext(request)
-    category_category = Genre.objects.order_by('-genre')[:5]
-    context_dict = {'genres': category_category}
+    genre_list = Genre.objects.order_by('-genre_main')[:5]
+    context_dict = {'genres': genre_list}
+    for genre in genre_list:
+        genre.url = genre.genre_main
+    return render_to_response('srkob/genre.html', context_dict, context)
 
-    return render_to_response('srkob/category.html', context_dict, context)
-    
+def genre_details(request, genre_name_url):
+    context = RequestContext(request)
+    genre_name = genre_name_url
+    context_dict = {'genre_name': genre_name}
+    try:
+        genre = Genre.objects.get(genre_main=genre_name)
+        books = Book.objects.filter(genre=genre)
+        context_dict['books'] = books
+        context_dict['genre'] = genre
+    except Genre.DoesNotExist:
+
+        pass
+    return render_to_response('srkob/genre_details.html', context_dict, context)
+ 
 def register(request):
     context = RequestContext(request)
     registered = False

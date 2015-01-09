@@ -27,13 +27,13 @@ class Genre(models.Model):
 
 
     
-class Books(models.Model):
+class Book(models.Model):
     title = models.CharField('Tytuł', max_length=50)
     author = models.ForeignKey(Author)
     about = models.TextField('Opis')
     genre = models.ForeignKey(Genre, verbose_name="Gatunek")
     sub_genre = models.CharField('Inne gatunki', max_length=50)
-    user = models.ForeignKey(User, verbose_name="Wypożyczył", blank=True)
+    user = models.ForeignKey(User, verbose_name="Wypożyczył", null=True, blank=True)
     state = models.BooleanField('Wypożyczona')
     class Meta:
         verbose_name = "Książka"

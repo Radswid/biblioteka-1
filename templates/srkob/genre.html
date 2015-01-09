@@ -1,0 +1,30 @@
+﻿{% extends 'srkob/base.html' %}
+
+{% load static %}
+
+{% block title %}Kategoria{% endblock%}
+
+
+{% block nav_body %}{% endblock %}
+{% block body_block %}
+
+
+ <h1>Rango says..hello world!</h1>
+
+        {% if genres %}
+            <ul>
+                {% for genre in genres %}
+                <li><a href="/srkob/genre_details/{{ genre.url }}">{{ genre.genre_main }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There are no categories present.</strong>
+        {% endif %}
+
+
+<li>{{ genre.all }}</li>
+
+
+
+{% endblock %} 
+	
