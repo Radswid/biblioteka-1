@@ -1,0 +1,37 @@
+﻿{% extends 'srkob/base.html' %}
+
+{% load static %}
+
+{% block title %}Logowanie{% endblock%}
+
+
+{% block nav_body %}{% endblock %}
+{% block body_block %}
+<div class="hero-unit">
+    
+    <div class="container">
+    <form class="form-signin span4" id="login_form" method="post" action="/srkob/login/">
+        <h2 class="form-signin-heading">Zaloguj się</h2>
+        {% csrf_token %}
+
+        {% if bad_details %}
+        <p><strong>Twoja nazwa użytkownika i/lub hasło są niepoprawne</strong></p>
+        {% elif disabled_account %}
+        <p><strong>Twoje konto jest aktualnie zablokowane. Skontaktuj się z Administratorem</strong></p>
+        {% endif %}
+
+        Nazwa użytkownika: <input type="text" class="input-block-level" placeholder="Username" name="username" value="" size="50" />
+        <br />
+        Hasło: <input type="password" class="input-block-level" placeholder="Password" name="password" value="" size="50" />
+        <br />
+        <button class="btn btn-primary" type="submit">Loguj</button>
+    </form>
+
+    </div>
+    <!-- /container -->
+</div>
+
+
+
+{% endblock %} 
+	

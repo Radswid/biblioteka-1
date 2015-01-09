@@ -5,25 +5,38 @@
 {% block title %}Rejestracja{% endblock%}
 {% block nav_body %}{% endblock %}
 {% block body_block %}
-        <h1>Rejestracja do systemu SRKOB</h1>
+       <div class="hero-unit">
+       <br />
 
+    <div class="container">
         {% if registered %}
-        <strong>Konto zostało stworzone</strong>
-        <a href="/srkob/">Strona glówna</a><br />
+        <p>Dziękujemy za rejestrację</p>
+
+        <p><a href="/srkob/login/">Zaloguj się</a></p>
         {% else %}
-        
-        <form id="user_form" method="post" action="/srkob/register/"
-                enctype="multipart/form-data">
-
+        <form class="form-signin span8" id="user_form" method="post" action="/srkob/register/"
+              enctype="multipart/form-data">
             {% csrf_token %}
+            <h2 class="form-signin-heading">Zarejestruj się</h2>
+            <!-- Display each form here -->
 
-            <!-- wyświetlamy każdy formularz. as.p sprawia że każde pole jest objęte <p></p>   -->
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
+            {% for field in user_form.visible_fields %}
+            {{ field.errors }}
+            {{ field.help_text }}<br />
+            {{ field }}<br />
+            {% endfor %}
 
+            {% for field in profile_form.visible_fields %}
+            {{ field.errors }}
+            {{ field.help_text }}<br />
+            {{ field }}<br />
+            {% endfor %}
+
+            <br />
             <!-- Provide a button to click to submit the form. -->
-            <input type="submit" name="submit" value="Register" />
+            <input class="btn btn-primary" type="submit" name="submit" value="Rejestruj"/>
         </form>
         {% endif %}
-   
+    </div>
+</div>
 {% endblock %} 

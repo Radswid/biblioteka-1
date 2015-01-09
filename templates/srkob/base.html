@@ -23,10 +23,13 @@
 
            <div class="nav-collapse collapse">
                <ul class="nav pull-right">
-                   
-                    <li><a href="/srkob/register/">Register</a></li>
-                    
-                   
+                   {% if user.is_authenticated %}
+                    <li class="navbar-text">Zalogowany jako: {{ user.username }}!</li>
+                    <li><a href="/srkob/logout/">Logout</a></li>
+                   {% else %}
+                    <li><a href="/srkob/register/">Rejestracja</a></li>
+                    <li><a href="/srkob/login/">Zaloguj</a></li>
+                   {% endif %}
                </ul>               
                <ul class="nav" pull-left>
                    <li><a href="/srkob/about/">O nas</a></li>
