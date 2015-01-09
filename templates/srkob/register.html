@@ -1,0 +1,29 @@
+{% extends 'srkob/base.html' %}
+
+{% load static %}
+
+{% block title %}Rejestracja{% endblock%}
+{% block nav_body %}{% endblock %}
+{% block body_block %}
+        <h1>Rejestracja do systemu SRKOB</h1>
+
+        {% if registered %}
+        <strong>Konto zostało stworzone</strong>
+        <a href="/srkob/">Strona glówna</a><br />
+        {% else %}
+        
+        <form id="user_form" method="post" action="/srkob/register/"
+                enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <!-- wyświetlamy każdy formularz. as.p sprawia że każde pole jest objęte <p></p>   -->
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+
+            <!-- Provide a button to click to submit the form. -->
+            <input type="submit" name="submit" value="Register" />
+        </form>
+        {% endif %}
+   
+{% endblock %} 

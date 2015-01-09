@@ -44,11 +44,11 @@ class Books(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User)
-    p_number = models.IntegerField('Pesel', max_length=11)
+    p_number = models.BigIntegerField('Pesel', max_length=11)
     street = models.CharField('Ulica', max_length=50)
     nr_house = models.IntegerField('Numer domu', max_length=5)
     nr_flat = models.IntegerField('Numer mieszkania', null=True, blank=True, max_length=5)
-    post_code = models.IntegerField('Kod pocztowy', max_length=6)
+    post_code = models.CharField('Kod pocztowy', max_length=6)
     city = models.CharField('Miejscowość', max_length=20)
     
     class Meta:
