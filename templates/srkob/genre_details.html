@@ -7,18 +7,20 @@
 
 {% block nav_body %}{% endblock %}
 {% block body_block %}
-        <h1>{{ genre_name }}</h1>
+        <div class="hero-unit">
+        <h3>{{ genre_name }}</h3>
         {% if genre %}
             {% if books %}
             <ul>
                 {% for book in books %}
-                <li><a>{{ book.title }}</a></li>
+                <li>{{ book.title }}</li>
                 {% endfor %}
             </ul>
             {% else %}
-                <strong>No pages currently in category.</strong>
+                <strong>NIe znaleziono żadnych książek.</strong>
             {% endif %}
         {% else %}
-            The specified category {{ category_name }} does not exist!
+            Gatunek {{ genre_name }} nie istnieje.
         {% endif %}
+        </div>
 {% endblock %} 

@@ -70,6 +70,7 @@ def register(request):
 
 def user_login(request):
     context = RequestContext(request)
+    context_dict = {}
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -79,11 +80,13 @@ def user_login(request):
                 login(request, user)
                 return HttpResponseRedirect('/srkob/')
             else:
-                return HttpResponse("Twoje konto jest zablokowane.")
+                context_dict['disabled_account'] = True
+                return render_to_response('srkob/login.html', context_dict, context)
 
         else:
             print "NIepoprawna dane:  {0}, {1}".format(username, password)
-            return HttpResponse("Nieporawne dane logowania.")
+            context_dict['bad_details'] = True
+            return render_to_response('srkob/login.html', context_dict, context)
     else:
         return render_to_response('srkob/login.html', {}, context)
 

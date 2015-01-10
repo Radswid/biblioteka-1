@@ -1,18 +1,17 @@
 ﻿{% extends 'srkob/base.html' %}
 
-
 {% load static %}
 {% block title %}Strona główna{% endblock%}
-
+{% block nav_block %}{% endblock %}	
 {% block body_block %}
-	<h1>Witamy na stronie O nas</h1></br>
-	<p>Strona SRKOB</p></br>
-	{{ boldmessage }}
+	<div class="hero-unit">
+    <h2>O nas</h2>
+    <p>System SRKOB powstał z myślą oszczedzenia chodzenia do biblioteki i powrotu bez niczego ponieważ to co chcieliśmy zostało już wypożyczone</p></br>
+    Na tej oto stronie można sprawdzić dostepność książki jak i zarezerwować ją do odbioru w bibliotece.</br>
+    
+
+    
+</div>
 {% endblock %} 
 
-{% block nav_block %}
-	<ul>
-		<li><a href="/srkob/">Strona główna</a></li>
-	</ul>
-	
-{% endblock %}	
+

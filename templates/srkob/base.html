@@ -42,11 +42,13 @@
 </br>
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span3">
+         <div class="span3">
             <div class="well sidebar-nav">
-                <a href="/srkob/genre/"> Książki </a>
-		{% block nav_body %} <a href="/srkob/genre/"> Książki </a>{%endblock%}
-
+              <ul class="nav nav-list">
+				<li class="nav-header">Nawigacja</li>  
+		          <li><a href="/srkob/genre/"> Książki </a></li>
+		         <li class="divider"></li>  
+			  </ul>	
             </div>
             <!--/.well -->
         </div>
@@ -55,6 +57,8 @@
             <br/>
 		{% block body_block %}
                 {% endblock %}
+        
+      
         </div>
         <!--/span-->
     </div>
