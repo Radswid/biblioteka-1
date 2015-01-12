@@ -8,6 +8,12 @@ from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
+def encode_url(str):
+    return str.replace(' ', '_')
+
+def decode_url(str):
+    return str.replace('_', ' ')
+
 def index(request):
     context = RequestContext(request)
     context_dict = {'boldmessage': " "}
@@ -36,7 +42,7 @@ def genre_details(request, genre_name_url):
         context_dict['books'] = books
         context_dict['genre'] = genre
         for book in books:
-            book.url = book.title
+            book.url = encode_url(book.title)
     except Genre.DoesNotExist:
 
         pass
@@ -44,10 +50,10 @@ def genre_details(request, genre_name_url):
 
 def book_details(request, book_name_url):
     context = RequestContext(request)
-    book_name = book_name_url
+    book_name = decode_url(book_name_url)
     context_dict = {'book_name' : book_name}
     try:
-        details = Book.objects.get(title=book_name)
+        details = Book.objects.filter(title=book_name)
         context_dict['details'] = details
     except Book.DoesNotExist:
 
