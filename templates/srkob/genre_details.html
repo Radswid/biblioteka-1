@@ -13,7 +13,8 @@
             {% if books %}
             <ul>
                 {% for book in books %}
-                <li>{{ book.title }}</li>
+                <li><a href="/srkob/book_details/{{ book.url }}">{{ book.title }}</a></li>
+                
                 {% endfor %}
             </ul>
             {% else %}
