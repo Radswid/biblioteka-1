@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from srkob.models import Profile
+from srkob.models import Profile, Book
 from django.contrib.auth.models import User
 from django import forms
 
@@ -28,3 +28,11 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ('p_number', 'street', 'nr_house', 'nr_flat', 'post_code', 'city')
 
+class BookForm(forms.ModelForm):
+    state = forms.BooleanField(widget=forms.HiddenInput(), initial=False)
+    user = forms.ModelChoiceField(queryset=User.objects.all(), widget=forms.HiddenInput())
+    date = forms.DateField(widget=forms.HiddenInput())
+
+    class Meta:
+        model = Book
+        fields = ('state', 'user', 'date')

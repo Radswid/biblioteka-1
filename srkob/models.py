@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-
 from django.contrib.auth.models import User
 from django import forms
 
@@ -32,9 +31,10 @@ class Book(models.Model):
     author = models.ForeignKey(Author)
     about = models.TextField('Opis')
     genre = models.ForeignKey(Genre, verbose_name="Gatunek")
-    sub_genre = models.CharField('Inne gatunki', max_length=50)
     user = models.ForeignKey(User, verbose_name="Wypożyczył", null=True, blank=True)
     state = models.BooleanField('Wypożyczona')
+    date = models.DateField('Data oddania', null=True, blank=True)
+
     class Meta:
         verbose_name = "Książka"
         verbose_name_plural = "Książki"
@@ -47,7 +47,7 @@ class Profile(models.Model):
     p_number = models.BigIntegerField('Pesel', max_length=11)
     street = models.CharField('Ulica', max_length=50)
     nr_house = models.IntegerField('Numer domu', max_length=5)
-    nr_flat = models.IntegerField('Numer mieszkania', blank=True, max_length=5)
+    nr_flat = models.IntegerField('Numer mieszkania', null=True, blank=True, max_length=5)
     post_code = models.CharField('Kod pocztowy', max_length=6)
     city = models.CharField('Miejscowość', max_length=20)
     

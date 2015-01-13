@@ -2,11 +2,21 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from srkob.models import Book, Genre
+from srkob.models import Book, Genre, Profile
 from srkob.forms import UserForm, ProfileForm
 from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+import datetime
+from django.contrib.auth.models import User
+
+def get_book_list():
+    book_list = Books.objects.all()
+
+    for book in book_list:
+        book.url = encode_url(book.title)
+
+    return book_list
 
 def encode_url(str):
     return str.replace(' ', '_')
@@ -51,6 +61,8 @@ def genre_details(request, genre_name_url):
 def book_details(request, book_name_url):
     context = RequestContext(request)
     book_name = decode_url(book_name_url)
+    date_plus = datetime.date.today() + datetime.timedelta(days=7)
+    context_dict = {'date_plus' : date_plus}
     context_dict = {'book_name' : book_name}
     try:
         details = Book.objects.get(title=book_name)
@@ -59,6 +71,11 @@ def book_details(request, book_name_url):
     except Book.DoesNotExist:
 
         pass
+    if request.method == 'POST':
+        book_form == BookForm(data=request.POST)
+        
+    
+        
     return render_to_response('srkob/book_details.html', context_dict, context)
  
 def register(request):
@@ -115,3 +132,25 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/srkob/')
+
+@login_required
+def user_profile(request):
+    context = RequestContext(request)
+    context_dict = {}
+    u = User.objects.get(username=request.user)
+    p = Profile.objects.get(user=u)
+    context_dict['user'] = u
+    context_dict['profile'] = p
+    return render_to_response('srkob/user_profile.html', context_dict, context)
+    
+def search(request):
+    context = RequestContext(request)
+    context_dict = {}
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+        if query:
+            books_list = Book.objects.filter(title__icontains=query) 
+            context_dict['books_list'] = books_list
+            for book in books_list:
+                book.url = encode_url(book.title)           
+    return render_to_response('srkob/search.html', context_dict, context)

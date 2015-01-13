@@ -24,7 +24,7 @@
            <div class="nav-collapse collapse">
                <ul class="nav pull-right">
                    {% if user.is_authenticated %}
-                    <li class="navbar-text">Zalogowany jako: {{ user.username }}!</li>
+                    <li class="navbar-text">Zalogowany jako: {{ user.first_name }}</li>
                     <li><a href="/srkob/logout/">Logout</a></li>
                    {% else %}
                     <li><a href="/srkob/register/">Rejestracja</a></li>
@@ -45,8 +45,16 @@
          <div class="span3">
             <div class="well sidebar-nav">
               <ul class="nav nav-list">
+				{% if user.is_authenticated %}
 				<li class="nav-header">Nawigacja</li>  
 		          <li><a href="/srkob/genre/"> Książki </a></li>
+		           <li><a href="/srkob/search/">Szukaj</a></li>
+		          <li><a href="/srkob/user_profile/"> Profil </a></li>
+		         {% else %}
+		         <li class="nav-header">Nawigacja</li>  
+		          <li><a href="/srkob/genre/"> Książki </a></li>
+		          <a href="/srkob/search/">Szukaj</a>
+		          {% endif %}
 		         <li class="divider"></li>  
 			  </ul>	
             </div>

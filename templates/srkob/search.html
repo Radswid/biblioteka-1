@@ -1,0 +1,41 @@
+{% extends 'srkob/base.html' %}
+
+{% load static %}
+
+{% block title %}Profil{% endblock%}
+
+
+{% block nav_body %}{% endblock %}
+{% block body_block %}
+<div class="hero-unit">
+<div class="container-fluid">
+    <p>Szukaj książek.</p>
+    <form class="span8 form-search" method="POST" action="/srkob/search/">
+        {% csrf_token %}
+        <input type="text" class="input-long search-query"  name="query"/ >
+        <button type="submit" class="btn btn-success" name="szukaj" value="Search">Szukaj</button>
+		
+    
+    
+    
+    </form>
+</div>
+
+<div class="container-fluid">
+    {% if books_list %}
+        <ol>
+            {% for book in books_list %}
+            <li>
+                <strong><a href="/srkob/book_details/{{ book.url }}">{{ book.title }}</a></strong><br />
+                
+                
+            </li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <br/>
+        <p>Nie ma żadnych wyników</p>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

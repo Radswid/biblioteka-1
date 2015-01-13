@@ -1,0 +1,21 @@
+{% extends 'srkob/base.html' %}
+
+{% load static %}
+
+{% block title %}Profil{% endblock%}
+
+
+{% block nav_body %}{% endblock %}
+{% block body_block %}
+<div class="hero-unit">
+
+ <h2>Profil użytkownika </h2>
+	Nazwa użytkownika: {{ user.username }}</br>
+	Adres Email: {{ user.email }}</br>
+	Imię i Nazwisko: {{ user.first_name }} {{ user.last_name }}</br>
+	Numer pesel: {{ profile.p_number }}</br>
+	Adres zamieszkania: <p>{{ profile.street }} {{ profile.nr_house }} {% if profile.nr_flat %} {{ profile.nr_flat }} {% else %} {% endif %} </br>
+	{{ profile.post_code }} {{ profile.city }}</p>
+
+</div>
+{% endblock %} 

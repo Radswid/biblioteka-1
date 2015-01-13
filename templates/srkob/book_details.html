@@ -2,17 +2,40 @@
 
 {% load static %}
 
-{% block title %}Książki{% endblock%}
+{% block title %}Książka{% endblock%}
 
 
 {% block nav_body %}{% endblock %}
 {% block body_block %}
         <div class="hero-unit">
-        <h1>{{ book_name }}</h1>
-        <h3>{{ details.title }}</h3> 
-        <h3>{{ details.about }}</h3> 
-               
-               
+        <h3>{{ book_name }}</h3>
+        <h4>{{ details.author.last_name }} {{ details.author.first_name }}</h4>
+        Krótki opis:</br>
+        <p>{{ details.about }}</p> 
+        {{ date.str }}
+       {% if user.is_authenticated %}
+                    
+                    <form class="form-signin span4" id="book_form" method="post" >
+                    {% csrf_token %}
+                    
+                    {% for hidden in form.hidden_fields %}
+                        <input id="state" value="True">
+                        <input id="user" value="{{ user.username }}">
+                        <input id="date" value="now()">
+                        {{ hidden }}
+                    {% endfor %}
+                                       
+                    <input type="date" id="date" value="{{ date_plus }}">
+                    <button class="btn btn-primary" type="submit" >Rezerwuj</button>
+                    </form>
+                    
+                   {% else %}
+                    </br>
+                    <button class="btn btn-primary disabled" disabled="disabled">Rezerwuj</button>
+                    Musisz się zalogować żeby rezerwować książki
+                    
+                   {% endif %}
+                      
                 
         
            

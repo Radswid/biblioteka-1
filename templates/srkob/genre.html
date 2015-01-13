@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Kategoria{% endblock%}
+{% block title %}Gatunek{% endblock%}
 
 
 {% block nav_body %}{% endblock %}
@@ -10,7 +10,7 @@
 <div class="hero-unit">
 
  <h2>Gatunki </h2>
-	Prosze wybrać intersujący Was gatunek.
+	Prosze wybrać intersujący Was gatunek:</br></br>
         {% if genres %}
             <ul class="inline">
                 {% for genre in genres %}
@@ -22,7 +22,7 @@
         {% endif %}
 
 
-<li>{{ genre.all }}</li>
+
 
 
 </div>
