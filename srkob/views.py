@@ -139,6 +139,8 @@ def user_profile(request):
     context_dict = {}
     u = User.objects.get(username=request.user)
     p = Profile.objects.get(user=u)
+    rent_list = Book.objects.filter(user=u)
+    context_dict['rents'] = rent_list
     context_dict['user'] = u
     context_dict['profile'] = p
     return render_to_response('srkob/user_profile.html', context_dict, context)
@@ -167,4 +169,5 @@ def rent_details(request):
         context_dict['title'] = title
         context_dict['user_name'] = user_name
         context_dict['date'] = date
+        state.save()
         return render_to_response('srkob/rent_details.html', context_dict, context)

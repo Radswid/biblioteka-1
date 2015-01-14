@@ -19,14 +19,11 @@
                     {% csrf_token %}
                     
                     {% for hidden in form.hidden_fields %}
-                        <input id="state" value="True" name="state">
-                        <input id="user" value="{{ user.username }}" name="user_name">
-                        <input id="date" value="now()" name="date">
-                        <input id="title" value="{{ book_name }}" name="title">
+                        
                         {{ hidden }}
                     {% endfor %}
-                    <input id="title" value="{{ book_name }}" name="title">                   
-                    <input id="date" value="now()" name="date">
+                    <input type="hidden" id="title" value="{{ book_name }}" name="title">                   
+                    <input id="date" value='{% now "SHORT_DATE_FORMAT" %}' name="date">
                     <input id="state" value="True" name="state">
                     <input id="user" value="{{ user.username }}" name="user_name">
                     <button class="btn btn-primary" type="submit" >Rezerwuj</button>

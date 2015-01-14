@@ -16,6 +16,6 @@
 	Numer pesel: {{ profile.p_number }}</br>
 	Adres zamieszkania: <p>{{ profile.street }} {{ profile.nr_house }} {% if profile.nr_flat %} {{ profile.nr_flat }} {% else %} {% endif %} </br>
 	{{ profile.post_code }} {{ profile.city }}</p>
-
+	</br>{% for rent in rents %}{{ rent.title }}</br>{% endfor %}
 </div>
 {% endblock %} 
