@@ -154,3 +154,17 @@ def search(request):
             for book in books_list:
                 book.url = encode_url(book.title)           
     return render_to_response('srkob/search.html', context_dict, context)
+
+def rent_details(request):
+    context = RequestContext(request)
+    context_dict = {}
+    if request.method == 'POST':
+        title = request.POST['title']        
+        user_name = request.POST['user_name']
+        date = request.POST['date']        
+        state = request.POST['state']
+        context_dict['state'] = state
+        context_dict['title'] = title
+        context_dict['user_name'] = user_name
+        context_dict['date'] = date
+        return render_to_response('srkob/rent_details.html', context_dict, context)

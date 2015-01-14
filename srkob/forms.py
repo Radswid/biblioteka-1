@@ -32,7 +32,8 @@ class BookForm(forms.ModelForm):
     state = forms.BooleanField(widget=forms.HiddenInput(), initial=False)
     user = forms.ModelChoiceField(queryset=User.objects.all(), widget=forms.HiddenInput())
     date = forms.DateField(widget=forms.HiddenInput())
+    title = forms.CharField(widget=forms.HiddenInput())
 
     class Meta:
         model = Book
-        fields = ('state', 'user', 'date')
+        fields = ('state', 'user', 'date', 'title')

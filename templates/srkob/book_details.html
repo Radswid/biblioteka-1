@@ -15,17 +15,20 @@
         {{ date.str }}
        {% if user.is_authenticated %}
                     
-                    <form class="form-signin span4" id="book_form" method="post" >
+                    <form class="form-signin span4" id="book_form" method="post" action="/srkob/rent_details/" >
                     {% csrf_token %}
                     
                     {% for hidden in form.hidden_fields %}
-                        <input id="state" value="True">
-                        <input id="user" value="{{ user.username }}">
-                        <input id="date" value="now()">
+                        <input id="state" value="True" name="state">
+                        <input id="user" value="{{ user.username }}" name="user_name">
+                        <input id="date" value="now()" name="date">
+                        <input id="title" value="{{ book_name }}" name="title">
                         {{ hidden }}
                     {% endfor %}
-                                       
-                    <input type="date" id="date" value="{{ date_plus }}">
+                    <input id="title" value="{{ book_name }}" name="title">                   
+                    <input id="date" value="now()" name="date">
+                    <input id="state" value="True" name="state">
+                    <input id="user" value="{{ user.username }}" name="user_name">
                     <button class="btn btn-primary" type="submit" >Rezerwuj</button>
                     </form>
                     
