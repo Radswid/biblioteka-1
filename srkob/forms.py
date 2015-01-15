@@ -2,6 +2,7 @@
 from srkob.models import Profile, Book
 from django.contrib.auth.models import User
 from django import forms
+import datetime
 
 #formularz z modelu User
 class UserForm(forms.ModelForm):
