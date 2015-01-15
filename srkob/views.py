@@ -71,9 +71,7 @@ def book_details(request, book_name_url):
     except Book.DoesNotExist:
 
         pass
-    if request.method == 'POST':
-        book_form == BookForm(data=request.POST)
-        
+       
     
         
     return render_to_response('srkob/book_details.html', context_dict, context)
@@ -161,10 +159,13 @@ def rent_details(request):
     context = RequestContext(request)
     context_dict = {}
     if request.method == 'POST':
+        
         title = request.POST['title']        
         user_name = request.user 
         date = request.POST['date']        
         state = request.POST['state']
+        date_date = datetime.datetime.strptime(date, '%Y-%m-%d').date()
+        date = date_date + datetime.timedelta(days=7)
         user_id = user_name.id
         user = User.objects.get(id=user_id)
         book = Book.objects.get(title=title)
