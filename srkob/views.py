@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from srkob.models import Book, Genre, Profile
-from srkob.forms import UserForm, ProfileForm
+from srkob.forms import UserForm, ProfileForm, BookForm
 from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -162,12 +162,17 @@ def rent_details(request):
     context_dict = {}
     if request.method == 'POST':
         title = request.POST['title']        
-        user_name = request.POST['user_name']
+        user_name = request.user 
         date = request.POST['date']        
         state = request.POST['state']
+        user_id = user_name.id
+        user = User.objects.get(id=user_id)
+        book = Book.objects.get(title=title)
+        book.user = user
+        book.save()
         context_dict['state'] = state
         context_dict['title'] = title
         context_dict['user_name'] = user_name
         context_dict['date'] = date
-        state.save()
+        
         return render_to_response('srkob/rent_details.html', context_dict, context)
