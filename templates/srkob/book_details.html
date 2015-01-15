@@ -14,7 +14,11 @@
         <p>{{ details.about }}</p> 
         {{ date.str }}
        {% if user.is_authenticated %}
-                    
+               {% if details.state %}
+                    </br>
+                    <button class="btn btn-primary disabled" disabled="disabled">Rezerwuj</button>
+                    Książka wypożyczona.
+               {% else %}
                     <form class="form-signin span4" id="book_form" method="post" action="/srkob/rent_details/" >
                     {% csrf_token %}
                     
@@ -23,18 +27,18 @@
                         {{ hidden }}
                     {% endfor %}
                     <input type="hidden" id="title" value="{{ book_name }}" name="title">                   
-                    <input type="hidden" id="date" value='{% now "SHORT_DATE_FORMAT" %}' name="date">
+                    <input type="hidden" id="date" value='{% now "Y-m-d" %}' name="date">
                     <input type="hidden" id="state" value="True" name="state">
                     <input type="hidden" id="user" value="{{ user.username }}" name="user_name">
                     <button class="btn btn-primary" type="submit" >Rezerwuj</button>
                     </form>
-                    
-                   {% else %}
+               {% endif %}     
+       {% else %}
                     </br>
                     <button class="btn btn-primary disabled" disabled="disabled">Rezerwuj</button>
                     Musisz się zalogować żeby rezerwować książki
                     
-                   {% endif %}
+       {% endif %}
                       
                 
         

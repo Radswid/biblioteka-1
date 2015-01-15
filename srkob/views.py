@@ -169,6 +169,8 @@ def rent_details(request):
         user = User.objects.get(id=user_id)
         book = Book.objects.get(title=title)
         book.user = user
+        book.state = state
+        book.date = date 
         book.save()
         context_dict['state'] = state
         context_dict['title'] = title
